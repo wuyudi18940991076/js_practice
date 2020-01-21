@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/index.css">
+  <title>扫雷游戏</title>
+</head>
+
+<body>
+  <div id="jieshao">
+    <h2 class="xiangfa">来看一下游戏介绍<br>请点击下面<span>箭头</span></h2>
+    <a href="#text" target="_Self"><img src="images/jiantou1.png" alt=""></a>
+  </div>
+  <div id="mine">
+    <div class="level">
+      <button class="active">初级</button>
+      <button>中级</button>
+      <button>高级</button>
+      <button>重新开始</button>
+    </div>
+    <div class="gameBox">
+
+    </div>
+    <div class="info">
+      剩余的雷数:
+      <span class="mineNum"></span>
+    </div>
+  </div>
+  <div id="text">
+    <h2>玩法介绍</h2>
+    <p>1.游戏分为三个难度，可以选择任意自己想挑战的难度。</p>
+    <p>2.左键单击：在判断出不是雷的方块上按下左键，可以打开该方块。如果方块上出现数字，则该数字表示其周围3×3区域中的地雷数（一般为8个格子，对于边块为5个格子，对于角块为3个格子。所以扫雷中最大的数字为8）；如果方块上为空（相当于0），则可以递归地打开与空相邻的方块；如果不幸触雷，则游戏结束。</p>
+    <p>3.右键单击：在判断为地雷的方块上按下右键，可以标记地雷（显示为粑粑）。重复一次操作可取消标记。</p>
+  </div>
+  <a class="back" href="#mine"><img src="images/shangjiantou.png" alt=""><span>回到顶部</span></a>
+  <script src="js/index.js"></script>
+</body>
+
+</html>

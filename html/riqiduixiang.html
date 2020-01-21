@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>日期对象应用</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #date {
+      width: 560px;
+      margin: 30px auto;
+    }
+
+    #date li {
+      width: 80px;
+      height: 80px;
+      float: left;
+      list-style: none;
+      text-align: center;
+      line-height: 80px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    #date span {
+      width: 80px;
+      height: 80px;
+      float: left;
+      text-align: center;
+      font-size: 22px;
+    }
+
+    .active {
+      background: #0078d7;
+      color: #fff
+    }
+  </style>
+</head>
+
+<body>
+  <div id="date">
+    <ul>
+      <li>日</li>
+      <li>一</li>
+      <li>二</li>
+      <li>三</li>
+      <li>四</li>
+      <li>五</li>
+      <li>六</li>
+    </ul>
+    <div id="lalala">
+
+    </div>
+  </div>
+  <pre>
+      var div = document.querySelector("#lalala")
+      var d = new Date();
+      /*
+      主要的思想：
+        1.这个月有多少天
+        2.这个月第一天是周几
+      */
+  
+  
+  
+      // console.log(d);
+      // console.log(d.getDate());
+      // var d1 = new Date(2008, 8, 8);
+      // console.log(d1)
+  
+      //要获取的是几月份，那第二个参数就传数字几
+  
+      // 1.这个月有多少天(要获取的是几月份，那第二个参数就传数字几)
+      function getEndDay(year, month) {
+        return new Date(year, month, 0).getDate(); //2019年9月0号相当于2019年8月31号，由于没有0号，所以八月最后一天
+      }
+      //console.log(getEndDay(2019,8));
+  
+  
+      // 2.这个月第一天是周几（要获取的是几月份，那第二个参数就传数字几）
+      function getWeek(year, month) {
+        return new Date(year, month - 1, 1).getDay(); //getDay获取星期的
+      }
+      //console.log(getWeek(2019,8));
+  
+  
+      //月份对应的索引0-11   月份：1-12
+      //上个月的最后一天是几号
+      // 8==d.getMonth()
+      var lastEndDay = getEndDay(d.getFullYear(), d.getMonth());
+  
+      //这个月（九月的最后一天是几号）
+      var curEndDay = getEndDay(d.getFullYear(), d.getMonth() + 1);
+  
+      //这个月（九月的第一天是几号）
+      var week = getWeek(d.getFullYear(), d.getMonth() + 1);
+      if (week == 0) {
+        week = 7;
+      }
+  
+      var curDay = 1; //下个月的日期从1开始
+      var dayStr = ''; //有所有span标签
+  
+  
+      for (var i = 0; i < 42; i++) {
+        if (i < week) { //这个条件成立，说明现在是上个月的日期
+          dayStr = '<span style="color:#ccc">' + (lastEndDay--) + '</span>' + dayStr;
+        } else if (i >= curEndDay + week) { //这个条件成立，说明现在是下个月的日期
+          dayStr += '<span style="color:#ccc">' + (curEndDay--) + '</span>';
+        } else { //这个条件成立，说明现在是当月的日期
+          var cl = '';
+          if (i - week + 1 == d.getDate()) {
+            cl = 'active';
+          }
+          dayStr += '<span class="' + cl + '">' + (i - week + 1) + '</span>';
+        }
+      }
+      div.innerHtml = dayStr;
+  </pre>
+  <script>
+    var div = document.querySelector("#lalala")
+    var d = new Date();
+    /*
+    主要的思想：
+      1.这个月有多少天
+      2.这个月第一天是周几
+    */
+
+    // console.log(d);
+    // console.log(d.getDate());
+    // var d1 = new Date(2008, 8, 8);
+    // console.log(d1)
+
+    //要获取的是几月份，那第二个参数就传数字几
+
+    // 1.这个月有多少天(要获取的是几月份，那第二个参数就传数字几)
+    function getEndDay(year, month) {
+      return new Date(year, month, 0).getDate(); //2019年9月0号相当于2019年8月31号，由于没有0号，所以八月最后一天
+    }
+    console.log(getEndDay(2019,8));
+
+
+    // 2.这个月第一天是周几（要获取的是几月份，那第二个参数就传数字几）
+    function getWeek(year, month) {
+      return new Date(year, month - 1, 1).getDay(); //getDay获取星期的
+    }
+    console.log(getWeek(2019,8));
+
+
+    //月份对应的索引0-11   月份：1-12
+    //上个月的最后一天是几号
+    // 8==d.getMonth()
+    var lastEndDay = getEndDay(d.getFullYear(), d.getMonth());
+
+    //这个月（九月的最后一天是几号）
+    var curEndDay = getEndDay(d.getFullYear(), d.getMonth() + 1);
+
+    //这个月（九月的第一天是几号）
+    var week = getWeek(d.getFullYear(), d.getMonth() + 1);
+    if (week == 0) {
+      week = 7;
+    }
+
+    var curDay = 1; //下个月的日期从1开始
+    var dayStr = ''; //有所有span标签
+
+
+    for (var i = 0; i < 42; i++) {
+      if (i < week) { //这个条件成立，说明现在是上个月的日期
+        dayStr = '<span style="color:#ccc">' + (lastEndDay--) + '</span>' + dayStr;
+      } else if (i >= curEndDay + week) { //这个条件成立，说明现在是下个月的日期
+        dayStr += '<span style="color:#ccc">' + (curEndDay--) + '</span>';
+      } else { //这个条件成立，说明现在是当月的日期
+        var cl = '';
+        if (i - week + 1 == d.getDate()) {
+          cl = 'active';
+        }
+        dayStr += '<span class="' + cl + '">' + (i - week + 1) + '</span>';
+      }
+    }
+    div.innerHTML = dayStr;
+  </script>
+</body>
+
+</html>

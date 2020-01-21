@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue小例子</title>
+</head>
+<style>
+  #app {
+    width: 666px;
+    margin-left: 0;
+    margin-right: 0;
+    margin: 50px auto;
+    border: 1px solid #333;
+    padding: 20px 20px;
+  }
+
+  .class1 {
+    background: #E63464;
+    color: #eee;
+    height: 30px;
+    width: 100px;
+    line-height: 30px;
+  }
+
+  button {
+    background-color: aliceblue;
+    color: #E63464;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+  }
+
+  button:focus {
+    outline: none;
+  }
+</style>
+
+<body>
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+
+  <div id="app">
+    <h2>第一个例子</h2>
+    <label for="r1">修改颜色</label><input type="checkbox" v-model="use" id="r1">
+    <br><br>
+    <div v-bind:class="{'class1': use}">
+      v-bind:class 指令
+    </div>
+    {{5+5}}<br>
+    {{ ok ? 'YES' : 'NO' }}<br>
+    {{ message.split('').reverse().join('') }}
+    <div v-bind:id="'list-' + id">vue学习</div>
+    <p v-if="seen">现在你看到我了吗</p>
+    <a :href="url">度娘链接</a>
+    <p>{{ message }}</p>
+    <input type="text" v-model="message">
+    <h3><span>v-if </span>指令，指令用于在表达式的值改变时，将某些行为应用到 DOM 上。</h3>
+    <h3><span>v-on </span>指令，它用于监听 DOM 事件：</h3>
+    <h3><span>v-model </span>指令，用来在 input、select、textarea、checkbox、radio <br>等表单控件元素上创建双向数据绑定，根据表单上的值，<br>自动更新绑定的元素的值。
+    </h3>
+    <h3>vue自定义过滤器：<br>允许管道符“|”是前一个命令的输出作为下一个命令的输入<br>过滤器可以串联<br>可以接受参数</h3>
+    <pre>
+      <h4> 在两个大括号中 </h4>
+      <h4> {{ message | capitalize }} </h4>
+
+      <h4> 在 v-bind 指令中 </h4>
+      <!-- <h4> <div v-bind:id="rawId | formatId"></div> </h4> -->
+      <!-- {{ message | filterA('arg1', arg2) }}
+      {{ message | filterA | filterB }}
+      {{ message | filterA('arg1', arg2) }} -->
+      <h4>message 是第一个参数，<br>字符串 'arg1' 将传给过滤器作为第二个参数，<br> arg2 表达式的值将被求值然后传给过滤器作为第三个参数。</h4>
+    </pre>
+    <div v-if="Math.random() > 0.5">
+      Sorry
+    </div>
+    <div v-else>
+      Not sorry
+    </div>
+    <h3>我们也可以使用 v-show 指令来根据条件展示元素：</h3>
+    <ul>
+      <li v-for="n in 10">
+        {{ n }}
+      </li>
+    </ul>
+    <pre>
+      computed vs methods
+      我们可以使用 methods 来替代 computed，效果上两个都是一样的，但是 computed 是基于它的
+      依赖缓存，只有相关依赖发生改变时才会重新取值。而使用 methods ，在重新渲染的时候，函数总
+      会重新调用执行。
+      computed 性能会更好,如果不希望缓存，你可以使用 methods 属性。
+    </pre>
+    <p style="font-size:25px;">计数器: {{ counter }}</p>
+    <button @click="counter++" style="font-size:25px;">点我</button>
+    <p>
+      千米 : <input type="text" v-model="kilometers">
+      米 : <input type="text" v-model="meters">
+    </p>
+    <p id="info"></p>
+    <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">菜鸟教程</div>
+    <div>
+      <button v-on:click="say('hi')">Say hi</button>
+      <button v-on:click="say('what')">Say what</button>
+    </div>
+    <div>
+      <!-- 阻止单击事件冒泡 -->
+      <a v-on:click.stop="doThis">阻止单击事件冒泡</a>
+      <!-- 提交事件不再重载页面 -->
+      <form v-on:submit.prevent="onSubmit">提交事件不再重载页面</form>
+      <!-- 修饰符可以串联  -->
+      <a v-on:click.stop.prevent="doThat">修饰符可以串联</a>
+      <!-- 只有修饰符 -->
+      <form v-on:submit.prevent>只有修饰符</form>
+      <!-- 添加事件侦听器时使用事件捕获模式 -->
+      <div v-on:click.capture="doThis">添加事件侦听器时使用事件捕获模式</div>
+      <!-- 只当事件在该元素本身（而不是子元素）触发时触发回调 -->
+      <div v-on:click.self="doThat">只当事件在该元素本身（而不是子元素）触发时触发回调</div>
+
+      <!-- click 事件只能点击一次，2.1.4版本新增 -->
+      <a v-on:click.once="doThis">事件只能点击一次</a>
+    </div>
+    <pre>
+        全部的按键别名：
+
+        .enter
+        .tab
+        .delete (捕获 "删除" 和 "退格" 键)
+        .esc
+        .space
+        .up
+        .down
+        .left
+        .right
+        .ctrl
+        .alt
+        .shift
+        .meta
+    </pre>
+    <p>input 元素：</p>
+    <input v-model="message" placeholder="编辑我……">
+    <p>消息是: {{ message }}</p>
+
+    <p>textarea 元素：</p>
+    <p style="white-space: pre">{{ message2 }}</p>
+    <textarea v-model="message2" placeholder="多行文本输入……"></textarea>
+    <p>单个复选框：</p>
+    <input type="checkbox" id="checkbox" v-model="checked">
+    <label for="checkbox">{{ checked }}</label>
+
+    <p>多个复选框：</p>
+    <input type="checkbox" id="runoob" value="Runoob" v-model="checkedNames">
+    <label for="runoob">Runoob</label>
+    <input type="checkbox" id="google" value="Google" v-model="checkedNames">
+    <label for="google">Google</label>
+    <input type="checkbox" id="taobao" value="Taobao" v-model="checkedNames">
+    <label for="taobao">taobao</label>
+    <br>
+    <span>选择的值为: {{ checkedNames }}</span>
+
+    <div>
+      <select v-model="selected" name="fruit">
+        <option value="">选择一个网站</option>
+        <option value="www.baidu.com">Baidu</option>
+        <option value="www.google.com">Google</option>
+      </select>
+
+      <div id="output">
+        选择的网站是: {{selected}}
+      </div>
+    </div>
+    <h2>修饰符</h2>
+    <pre>
+      .lazy
+      在默认情况下， v-model 在 input 事件中同步输入框的值与数据，但你可以添加一个修饰符 lazy ，<br>从而转变为在 change 事件中同步：
+      <!-- 在 "change" 而不是 "input" 事件中更新 -->
+      <!-- <input v-model.lazy="" > -->
+      .number
+      如果想自动将用户的输入值转为 Number 类型（如果原值的转换结果为 NaN 则返回原值），可以添加一个修饰符<br> number 给 v-model 来处理输入值：
+
+      <!-- <input v-model.number="age" type="number"> -->
+      这通常很有用，因为在 type="number" 时 HTML 中输入的值也总是会返回字符串类型。
+
+      .trim
+      如果要自动过滤用户输入的首尾空格，可以添加 trim 修饰符到 v-model 上过滤输入：
+
+      <!-- <input v-model.trim="msg"> -->
+    </pre>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        use: false,
+        ok: true,
+        message: 'RUNOOB',
+        message2: 'wuyudi\r\nwahaha',
+        id: 1,
+        seen: true,
+        url: 'https://www.baidu.com/',
+        counter: 1,
+        kilometers: 0,
+        meters: 0,
+        activeColor: 'green',
+        fontSize: 18,
+        checked: false,
+        checkedNames: [],
+        selected: ''
+      },
+      methods: {
+        say: function (message) {
+          alert(message)
+        }
+      },
+      watch: {
+        kilometers: function (val) {
+          this.kilometers = val;
+          this.meters = this.kilometers * 1000
+        },
+        meters: function (val) {
+          this.kilometers = val / 1000;
+          this.meters = val;
+        }
+      }
+    });
+    vm.$watch('counter', function (nval, oval) {
+      alert('计数器值的变化 :' + oval + ' 变为 ' + nval + '!');
+    });
+    vm.$watch('kilometers', function (newValue, oldValue) {
+      // 这个回调将在 vm.kilometers 改变后调用
+      document.getElementById("info").innerHTML = "修改前值为: " + oldValue + "，修改后值为: " + newValue;
+    })
+  </script>
+</body>

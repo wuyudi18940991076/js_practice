@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <title>vue单向数据流</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #app {
+      display: inline-block;
+      margin: 20px;
+      border: 1px solid #000;
+      padding: 20px;
+      padding-bottom: 0;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .course {
+      display: flex;
+      margin-bottom: 15px;
+    }
+
+    .img-box {
+      position: relative;
+      margin-right: 20px;
+    }
+
+    .course-img {
+      width: 140px;
+      height: 80px;
+      vertical-align: bottom;
+    }
+
+    .course span {
+      box-sizing: border-box;
+      position: absolute;
+      bottom: 0;
+      display: block;
+      width: 100%;
+      line-height: 20px;
+      padding-left: 10px;
+      color: #fff;
+      font-size: 10px;
+      background-color: rgba(0, 0, 0, .6)
+    }
+
+    .title {
+      width: 250px;
+      box-sizing: border-box;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .free {
+      color: aqua;
+    }
+
+    .play-back {
+      display: inline-block;
+      padding: 0 3px;
+      font-size: 12px;
+      border: 1px solid #E63464;
+    }
+
+    .price {
+      color: coral;
+    }
+
+    .choose {
+      opacity: .3;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>当鼠标左键点击时候变成了删除</h2>
+  <div id="app">
+    <course-list :list="courseList" @price="getPrice"></course-list>
+    <course-list :list="courseList" @price="getPrice"></course-list>
+    <h2>合计：{{price}}</h2>
+  </div>
+</body>
+<!-- <script>
+ 
+  Vue.component('courseList', {
+    template: '<div>全局组件</div>'
+  })
+  
+  const vm = new Vue({
+    el:'#app',
+    components:{
+      course: {
+        template: '<div>局部组件</div>'
+      }
+    },
+    data: {
+
+    }
+  })
+</script> -->
+<script>
+  // 全局组件
+  // Vue.component('courseList', {
+  //   template: '<div>全局组件</div>'
+  // })
+  const courseList = {
+    // props:['list'],
+    props: {
+      list: {
+        type: Array,
+        default: [],
+        required: true,
+        // 规定父组件是否必须把值传过来
+        validator(value) {
+          return value.length < 5
+        }
+        // 对我们传过来的值进行校验
+      }
+    },
+    data() {
+      return {
+        totalPriceArr: [],
+        alreadyHasArr: [],
+        totalPrice: 0,
+        courseList: this.list.concat([])
+      }
+    },
+    template: `<ul>
+                <li v-for="(item, index) in courseList"
+                :key="item.name" 
+                @click="addTobuy(index, item.price)"
+                @contextmenu.prevent="removeFromBuy(index, item.price)"
+                :class="{course:true, choose: alreadyHasArr[index]}">
+                  <div class="img-box">
+                    <img class="course-img" :src="item.poster" alt="">
+                    <span v-if="item.enrollment">{{item.enrollment}}人报名</span>
+                    <span v-if="item.buyNumber">{{item.buyNumber}}人购买</span>
+                  </div>
+                  <div class="content-box" v-for>
+                    <div class="title">{{item.name}}</div>
+                    <div class="free" v-if="item.free">免费</div>
+                    <div class="play-back" v-if="item.playback">回放</div>
+                    <div class="price" v-if="item.price">￥{{item.price}}</div>
+                  </div>
+                </li>
+              </ul>`,
+    methods: {
+      addTobuy(index, price) {
+        // if (this.alreadyHasArr[index]) {
+        //   return
+        // }
+        // this.totalPriceArr.push(price)
+        // this.alreadyHasArr[index] = true
+        // this.$set(this.alreadyHasArr, index, true)
+        // this.getTotalPrice()
+
+
+
+        // this.alreadyHasArr.splice(index, 1, true)
+        // console.log(this.totalPriceArr)
+        // console.log(this.alreadyHasArr)
+        // this.totalPrice = this.totalPriceArr.reduce((prev, cur) => {
+        //   return prev + cur
+        // })
+        // console.log(this.totalPrice)
+
+
+        this.courseList.splice(index, 1)
+      },
+      removeFromBuy(index, price) {
+        if (!this.alreadyHasArr[index]) {
+          return
+        }
+        const totalPriceIndex = this.totalPriceArr.findIndex(item => {
+          return item == price
+        })
+        this.alreadyHasArr.splice(index, 1, false)
+        this.totalPriceArr.splice(totalPriceIndex, 1)
+        this.getTotalPrice()
+
+      },
+      getTotalPrice() {
+        if (this.totalPriceArr.length === 0) {
+          this.totalPrice = 0
+        } else {
+          this.totalPrice = this.totalPriceArr.reduce((prev, cur) => {
+            return prev + cur
+          })
+        }
+        this.$emit('price', this.totalPrice)
+        console.log(this.totalPrice)
+      }
+    }
+  }
+  // 局部组件
+  const vm = new Vue({
+    el: '#app',
+    components: {
+      courseList
+    },
+    data: {
+      price: 0,
+      courseList: [{
+          name: 'Web前端开发之JavaScript(Js)精英课堂【渡一教育】',
+          free: true,
+          playback: false,
+          price: 0,
+          buyNumber: 0,
+          enrollment: 4942,
+          poster: 'https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLBsSud06XlZnJACsTWd7OSA5phIFPRTNibFBeuT8jRjy00Jb5ticSEKYUnpUYdBCicH2U/356'
+        },
+        {
+          name: 'Web前端开发之HTML+CSS精英课堂【渡一教育】',
+          free: true,
+          playback: false,
+          price: 0,
+          buyNumber: 0,
+          enrollment: 2982,
+          poster: 'https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLBDFLdArBwf70PjMrL6bq0OI9LesEsskk1iamJKibriaic0QkBZhINoDuN0DicaojkqyQjk/356'
+        },
+        {
+          name: '淘宝商城项目实战开发【渡一教育】',
+          free: true,
+          playback: false,
+          price: 0,
+          buyNumber: 0,
+          enrollment: 1742,
+          poster: 'https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLDBpXKL1sgAOKcbSz0Od2abiaqdJibiaDDQWfmrVNBCFrIpbTQKlNyWbPg5Uo1dnT7Znk/356'
+        },
+        {
+          name: '零基础WEB前端入门',
+          free: false,
+          playback: true,
+          price: 9.9,
+          buyNumber: 2514,
+          enrollment: 0,
+          poster: 'https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCRlDgtxVbmyclxP9fDUYmnuqAFbN5mYsncrPrVyQbtA3fNfuZ3qicSe1r7Ppt7tICs/356'
+        },
+        {
+          name: 'React顶级企业实战，全流程制作淘票票WebApp【渡一教育】',
+          free: false,
+          playback: true,
+          price: 399,
+          buyNumber: 670,
+          enrollment: 0,
+          poster: 'https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLB2CyXIxsb8iaAUibBB9mzlkSgKNU7GiciaYxG1SicoLjkiahZ3ia54eZWbtCGDkFyvMo0uKk/356'
+        },
+        {
+          name: '原生JS贪吃蛇游戏实战开发【渡一教育】',
+          free: true,
+          playback: false,
+          price: 0,
+          buyNumber: 0,
+          enrollment: 1123,
+          poster: 'https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCfsOGnxjhUXFA6SHMOu0fMUicuucRlIVNo9zBnnLiacovMnePD6586QlRj2qvwudbn8/356'
+        },
+        {
+          name: '原生JS扫雷游戏实战开发【渡一教育】',
+          free: true,
+          playback: false,
+          price: 0,
+          buyNumber: 0,
+          enrollment: 631,
+          poster: 'https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLDaTljUSVGk2eqS1MCT3DwDqxgs7KhfMf3411SXQkRvmiaicIuz47ydO27zGPWK97wicw/356'
+        },
+        {
+          name: '你不知道的Javascript【渡一教育】',
+          free: true,
+          playback: false,
+          price: 0,
+          buyNumber: 0,
+          enrollment: 1696,
+          poster: 'https://10.url.cn/qqcourse_logo_ng/ajNVdqHZLLCelo2lyibtrxDia7aq7tC0LE1Lcz2LVoDqhQy5tnOHicTzWhLuvPekL35rEmwTdgNuwI/356'
+        }
+      ]
+    },
+    methods: {
+      getPrice(price) {
+        this.price = price
+      }
+    }
+  })
+</script>
+
+</html>

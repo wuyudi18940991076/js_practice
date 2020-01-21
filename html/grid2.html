@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>grid2</title>
+  <style>
+    .body{
+      width: 600px;
+      margin-left: 0;
+      margin-right: 0;
+      margin:20px auto;
+    }
+    .wrapper {
+      display: grid;
+      grid-template-columns: 100px 300px 100px;
+      grid-template-rows: 100px 100px 200px;
+      grid-template-areas: "three three two"
+                            "four one two"
+                            "four five five"
+    }
+
+    .demo:nth-child(1) {
+      grid-area: one;
+      background-color: rgb(70, 190, 54);
+    }
+
+    .demo:nth-child(2) {
+      grid-area: two;
+      background-color: coral;
+    }
+
+    .demo:nth-child(3) {
+      grid-area: three;
+      background-color: cyan;
+    }
+
+    .demo:nth-child(4) {
+      grid-area: four;
+      background-color: darkorange;
+    }
+
+    .demo:nth-child(5) {
+      grid-area: five;
+      background-color:gold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="body">
+    <h1>下面的图形应用了grid</h1>
+    <div class="wrapper">
+      <div class="demo">1</div>
+      <div class="demo">2</div>
+      <div class="demo">3</div>
+      <div class="demo">4</div>
+      <div class="demo">5</div>
+    </div>
+    <h3>
+      <pre>
+  grid容器属性
+  1.display:grid/inline-grid;
+  2.grid-template-columns:定义每一列的列宽
+  3.grid-template-rows:定义每一行的行高
+  4.justify-content:center;设置整个网格在容器内的水平方向排列方式
+  5.align-content:center;设置整个网格在容器内的垂直方向排列方式
+  start:起始位置
+  end:右侧
+  space-between每一列的左右两边
+  justify-items;设置每一个项目在单元格内的排列方式 水平方向
+  align-items:设置每一个项目在单元格内的排列方式 垂直方向
+
+  grid-column:1/3等同于下面
+  grid-column-start:1开始的网格线
+  grid-column-end:3结束的网格线（上面和下面的代表两个项目占一个单元格）
+
+  grid-row-start:2上面和下面的代表两个项目占垂直方向的一个单元格
+  grid-row-end:4
+
+
+
+  grid-area:grid-row-start/grid-column-start/grid-column-end/grid-row-end
+
+  grid-template-areas:划分网格结构（给每一个名称起名字）
+      </pre>
+    </h3>
+  </div>
+</body>
+
+</html>

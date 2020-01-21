@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <title>Document</title>
+  <style>
+    #app {
+      width: 666px;
+      margin-left: 0;
+      margin-right: 0;
+      margin: 50px auto;
+      border: 1px solid #333;
+      padding: 20px 20px;
+    }
+
+    .class1 {
+      background: #E63464;
+      color: #eee;
+      height: 30px;
+      width: 100px;
+      line-height: 30px;
+    }
+
+    button {
+      background-color: aliceblue;
+      color: #E63464;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      padding: 5px 10px;
+    }
+
+    button:focus {
+      outline: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <runoob></runoob>
+    <runoob1></runoob1>
+    <h1>父组件的数据要通过props把数据传递给子组件，子组件需要显示的用Props选项声明“prop”</h1>
+    <h2>prop是父组件用来传递数据的一个自定义属性</h2>
+    <child message="prop父传子"></child>
+    <ol>
+      <todo-item v-for="item in sites" v-bind:todo="item"></todo-item>
+    </ol>
+    <h3>注意prop是单向绑定的：当父组件的属性变化时，将传导给子组件，但是不会反过来</h3>
+    <h1>prop验证</h1>
+    <pre>
+        Vue.component('my-component', {
+          props: {
+            // 基础的类型检查 (`null` 和 `undefined` 会通过任何类型验证)
+            propA: Number,
+            // 多个可能的类型
+            propB: [String, Number],
+            // 必填的字符串
+            propC: {
+              type: String,
+              required: true
+            },
+            // 带有默认值的数字
+            propD: {
+              type: Number,
+              default: 100
+            },
+            // 带有默认值的对象
+            propE: {
+              type: Object,
+              // 对象或数组默认值必须从一个工厂函数获取
+              default: function () {
+                return { message: 'hello' }
+              }
+            },
+            // 自定义验证函数
+            propF: {
+              validator: function (value) {
+                // 这个值必须匹配下列字符串中的一个
+                return ['success', 'warning', 'danger'].indexOf(value) !== -1
+              }
+            }
+          }
+        })
+    </pre>
+    <h2>如果子组件要把数据传递回去，就需要使用自定义事件</h2>
+    <h3>$on(eventName)监听事件</h3>
+    <h3>$emit(eventName)触发事件</h3>
+    <h4>父组件可以在使用子组件的地方直接用v-on来监听子组件触发的事件</h4>
+  </div>
+  <script>
+    var Child = {
+      template: '<h1>注册 局部 组件</h1>'
+    }
+    // 注册
+    Vue.component('runoob', {
+      template: '<h1>注册 全局 组件</h1>'
+    })
+    Vue.component('child', {
+      // 声明props
+      props: ['message'],
+      template: '<span>{{message}}</span>'
+    })
+    Vue.component('todo-item', {
+      props: ['todo'],
+      template: '<li>{{ todo.text }}</li>'
+    })
+    Vue.component('my-component', {
+      props: {
+        // 基础的类型检查 (`null` 和 `undefined` 会通过任何类型验证)
+        propA: Number,
+        // 多个可能的类型
+        propB: [String, Number],
+        // 必填的字符串
+        propC: {
+          type: String,
+          required: true
+        },
+        // 带有默认值的数字
+        propD: {
+          type: Number,
+          default: 100
+        },
+        // 带有默认值的对象
+        propE: {
+          type: Object,
+          // 对象或数组默认值必须从一个工厂函数获取
+          default: function () {
+            return {
+              message: 'hello'
+            }
+          }
+        },
+        // 自定义验证函数
+        propF: {
+          validator: function (value) {
+            // 这个值必须匹配下列字符串中的一个
+            return ['success', 'warning', 'danger'].indexOf(value) !== -1
+          }
+        }
+      }
+    })
+    // 创建根实例
+    new Vue({
+      el: '#app',
+      data: {
+        sites: [{
+            text: 'Runoob'
+          },
+          {
+            text: 'Google'
+          },
+          {
+            text: 'Taobao'
+          }
+        ]
+      },
+      components: {
+        'runoob1': Child
+      }
+    })
+  </script>
+</body>
+
+</html>

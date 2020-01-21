@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>es6的初步学习</title>
+</head>
+
+<body>
+  <h1>es6一共有六种变量声明的方法</h1>
+  <h2>let命令</h2>
+  <h3>es6新增了let命令，所声明的变量只在let命令所在的代码块中有效</h3>
+  <pre>
+    for循环的计数器，就很适合使用let命令，计数器i只有在for循环体内有效，再循环体外引用就会报错
+    不存在变量提升
+    不允许重复声明
+  </pre>
+  <h2>const命令</h2>
+  <pre>
+    const声明一个只读的常量，一旦声明，常量的值就不能改变
+    一旦声明变量，就必须立即初始化，不能留到以后赋值
+    不能只声明不赋值
+    const的作用域与let命令相同：只在声明所在的块级作用域有效
+    也不存在变量声明提升  
+    存储常量里面空间里的值不能发生改变  
+  </pre>
+  <h3>const实际上保证的，并不是变量的值不得改动，而是变量指向的那个内存地址所保存的数据不得改动</h3>
+
+  <h2>解构赋值</h2>
+  <h3>不能使用圆括号的情况</h3>
+  <pre>
+    1.变量声明语句
+    2.函数参数
+    3.赋值语句的模型
+  </pre>
+  <h2>可以使用圆括号的情况只用一种：赋值语句的非模型部分，可以使用圆括号</h2>
+  <h3>用途</h3>
+  <pre>
+    1.交换变量的值
+    2.从函数返回多个值
+    // 返回一个数组
+    function example() {
+      return [1, 2, 3];
+    }
+    let [a, b, c] = example();
+
+    // 返回一个对象
+    function example() {
+      return {
+        foo: 1,
+        bar: 2
+      };
+    }
+    let { foo, bar } = example();
+    3.函数参数的定义
+    4.提取json数据
+    let jsonData = {
+      id: 42,
+      status: "OK",
+      data: [867, 5309]
+    };
+    let { id, status, data: number } = jsonData;
+    console.log(id, status, number);
+    // 42, "OK", [867, 5309]
+    5.函数参数的默认值
+  </pre>
+  object.assign
+
+  destructuring 解构
+  <pre>
+    ...展开&收集运算符：
+        此运算符在不同地方使用有不同的功效，可以从读和写两个角度考虑
+              写:function test (..arg){};test(1,2,3);-收集作用 ----是数组----
+              读:var arg = [1,2,3];console.log(...arg);-展开作用
+        作用：简化书写长度，提升开发效率
+  </pre>
+  <pre>
+    "标签模板"的一个重要应用，就是过滤html字符串，防止输入恶意内容
+    另一个应用就是国际化处理(下面就是国际化处理)
+    i18n`Welcome to ${siteName},you are visitor number ${visitorNumber}!`
+  </pre>
+</body>
+<script>
+  function sum(...arg) {
+    let sumNumber = 0;
+    arg.forEach(function (ele) {
+      sumNumber += ele;
+    });
+    return sumNumber;
+  }
+  sum(1,2,3)
+</script>
+<script>
+  function avearge (...arg){
+    arg.sort(function (a,b) {
+      return a - b;
+    });
+    arg.pop();
+    arg.shift();
+    return computedScore.apply(this, arg);
+  }
+  function computedScore (...arg) {
+    let sum = 0;
+    arg.forEach(function (ele) {
+      sum += ele;
+    });
+    return sum / arg.length;
+  };
+  avearge(43,53,64,76,82,34,76)
+</script>
+
+
+
+
+<script>
+  let a = 5;
+  let b = 10;
+  function tag(s, v1, v2) {
+    console.log(s[0]);
+    console.log(s[1]);
+    console.log(s[2]);
+    console.log(v1);
+    console.log(v2);
+    return "OK";
+  }
+  tag`Hello ${ a + b } world ${ a * b}`;
+  // "Hello "
+// " world "
+// ""
+// 15
+// 50
+// "OK"
+</script>
+
+
+
+
+</html>

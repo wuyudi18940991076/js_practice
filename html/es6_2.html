@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>字符串的新增方法</title>
+</head>
+<body>
+  <h1>String.fromCodePoint()</h1>
+  <h2>可以识别大于0xFFFF的字符，弥补了String.fromCharCode()方法的不足</h2>
+  <h2>String.raw()</h2>
+  <h3>对斜杠进行转义</h3>
+  <h3>作为正常的函数使用，它的第一个值应该是一个数组</h3>
+  <h2>codePointAt()</h2>
+  <h3>是测试一个字符由两个字节还是四个字节组成的最简单的方法</h3>
+  <h2>normalize()</h2>
+  <h2>includes(),startsWith(),endsWith()</h2>
+  <h3>includes()返回布尔值，表示是否找到了参数字符串</h3>
+  <h3>startsWith()返回布尔值，表示参数字符串是否在原字符串的头部</h3>
+  <h3>endsWith()返回布尔值，表示参数字符串是否在原字符串的尾部</h3>
+  <h3>上面的代码都支持第二个参数</h3>
+  <h2>repeat()</h2>
+  <h3>返回一个新字符串，表示将原字符串重复n次</h3>
+  <pre>
+    如果是小数会被整除
+    如果是负数或者infinity会报错
+    如果repeat的参数是字符串，则会先转换成数字。
+    'na'.repeat('na') // ""
+    'na'.repeat('3') // "nanana"
+  </pre>
+  <h2>padStart() padEnd()用于补全字符串长度</h2>
+  <pre>
+      'x'.padStart(5, 'ab') // 'ababx'
+      'x'.padStart(4, 'ab') // 'abax'
+      
+      'x'.padEnd(5, 'ab') // 'xabab'
+      'x'.padEnd(4, 'ab') // 'xaba'
+      如果省略第二个参数，默认使用空格补全长度。
+      padStart()的常见用途是为数值补全指定位数。下面代码生成 10 位的数值字符串。
+
+      '1'.padStart(10, '0') // "0000000001"
+      '12'.padStart(10, '0') // "0000000012"
+      '123456'.padStart(10, '0') // "0000123456"
+      另一个用途是提示字符串格式。
+
+      '12'.padStart(10, 'YYYY-MM-DD') // "YYYY-MM-12"
+      '09-12'.padStart(10, 'YYYY-MM-DD') // "YYYY-09-12"
+  </pre>
+  <h2>matchAll()方法返回一个正则表达式在当前字符串的所有匹配，详见《正则的扩展》的一章。</h2>
+</body>
+</html>

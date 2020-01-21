@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>animation</title>
+  <style>
+    .demo {
+      width: 100px;
+      height: 100px;
+      background-color: rgb(253, 34, 6);
+      text-align: center;
+      color: #000;
+      line-height: 100px;
+      font-size: 16px;
+      font-weight: 700;
+      position: absolute;
+      left: 0;
+      animation: move 2s;
+      /* animation-fill-mode: backwards; */
+      /* backwards 代表的是立即作用第一个关键帧动画的效果 */
+      /* animation-fill-mode: forwards; */
+      /* forwards 代表的是最终动画停止在最后一个关键帧的位置 */
+      animation-fill-mode: both;
+      /* both代表的是立即作用第一个关键帧动画的效果又能最终动画停止在最后一个关键帧的位置 */
+      /* animation-direction: normal; */
+      /* 从前往后 */
+      /* animation-direction: reverse; */
+      /* 反向的执行，从100%到0% */
+      /* animation-direction: alternate; */
+      /* 有间隔就有多次，那就是多次执行动画，是往返的运动交替 */
+      /* animation-iteration-count: 3; */
+      /* 执行三次的意思 */
+      animation-iteration-count: infinite;
+      /* 一直不停的做这个动作 */
+      /* animation-iteration-count: alternate-reverse; */
+      /* 反向往返 */
+      animation-delay: 1s;
+      /* 设置什么时候执行 ,停止一秒后执行*/
+      /* animation-timing-function: ease; */
+      /* 运动的轨迹：先快再慢再快 */
+      /* animation-timing-function: linear; */
+      /* 匀速运动 */
+      /* animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); */
+      /* 贝塞尔曲线 */
+    }
+
+    @keyframes move {
+      0% {
+        left: 0;
+        top: 0;
+      }
+
+      25% {
+        left: 300px;
+        top: 0;
+        background-color: rgb(248, 136, 8);
+      }
+
+      50% {
+        left: 300px;
+        top: 300px;
+        background-color: rgb(250, 225, 3);
+      }
+
+      75% {
+        left: 0px;
+        top: 300px;
+        background-color: rgb(16, 235, 27);
+      }
+
+      100% {
+        left: 0px;
+        top: 0px;
+        background-color: rgb(19, 233, 26);
+      }
+    }
+
+    .box {
+      width: 250px;
+      height: 250px;
+      background-color: rgb(250, 43, 15);
+      text-align: center;
+      color: #000;
+      line-height: 250px;
+      font-size: 16px;
+      font-weight: 700;
+      animation: stretch 1.5s infinite alternate ease-out;
+      /*1.5秒   不间断    交替效果  快慢*/
+      /* 顺序是可以颠倒的，但是动画执行时间在前，延迟在后，其他都可以 */
+      margin: 100px auto;
+    }
+
+    @keyframes stretch {
+      0% {
+        transform: scale(0.5);
+        /* 宽高都缩小0.5倍 */
+        border-radius: 100%;
+      }
+
+      25% {
+        background-color: rgb(236, 142, 19);
+      }
+
+      50% {
+        background-color: rgb(229, 253, 9);
+      }
+
+      75% {
+        background-color: rgb(68, 204, 55);
+      }
+
+      100% {
+        background-color: rgb(10, 204, 252);
+        transform: scale(1.5);
+        /* 宽高都放大1.5倍 */
+        border-radius: 0%;
+      }
+    }
+
+    pre{
+      color: #000;
+      font-size: 16px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="demo">上下左右</div>
+  <div class="box">由圆变方</div>
+  <h2>css3的animation用来做动画效果的</h2>
+  <h3>keyframes</h3>
+  <pre>
+      animation: move 2s;
+      /* animation-fill-mode: backwards; */
+      /* backwards 代表的是立即作用第一个关键帧动画的效果 */
+      /* animation-fill-mode: forwards; */
+      /* forwards 代表的是最终动画停止在最后一个关键帧的位置 */
+      animation-fill-mode: both;
+      /* both代表的是立即作用第一个关键帧动画的效果又能最终动画停止在最后一个关键帧的位置 */
+      /* animation-direction: normal; */
+      /* 从前往后 */
+      /* animation-direction: reverse; */
+      /* 反向的执行，从100%到0% */
+      /* animation-direction: alternate; */
+      /* 有间隔就有多次，那就是多次执行动画，是往返的运动交替 */
+      /* animation-iteration-count: 3; */
+      /* 执行三次的意思 */
+      animation-iteration-count: infinite;
+      /* 一直不停的做这个动作 */
+      /* animation-iteration-count: alternate-reverse; */
+      /* 反向往返 */
+      animation-delay: 1s;
+      /* 设置什么时候执行 ,停止一秒后执行*/
+      /* animation-timing-function: ease; */
+      /* 运动的轨迹：先快再慢再快 */
+      /* animation-timing-function: linear; */
+      /* 匀速运动 */
+      /* animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); */
+      /* 贝塞尔曲线 */
+  </pre>
+</body>
+
+</html>

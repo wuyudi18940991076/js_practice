@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../css/string.css">
+  <title>字符串的方法</title>
+</head>
+
+<body>
+  <div class="background">
+    <h2>查找字符串中的字符串</h2>
+    <h3><span>indexOf() </span>方法返回字符串中指定文本首次出现的索引（位置）：</h3>
+    <pre>
+      var str = "The full name of China is the People's Republic of China.";
+      var pos = str.indexOf("China");        
+    </pre>
+    <h3><span>lastIndexOf() </span>方法返回指定文本在字符串中最后一次出现的索引：</h3>
+    <pre>
+      var pos = str.lastIndexOf("China");
+    </pre>
+    <h3>如果未找到文本， <span>indexOf() </span>和 <span>lastIndexOf() </span>均返回 -1。</h3>
+    <h3>两种方法都接受作为检索起始位置的第二个参数。</h3>
+    <pre>
+      var pos = str.indexOf("China", 18);
+    </pre>
+    <h3><span>lastIndexOf()</span>方法向后进行检索（从尾到头），这意味着：假如第二个参数是 50，则从位置 50 开始检索，直到字符串的起点</h3>
+    <pre>
+      var pos = str.lastIndexOf("China", 50);
+    </pre>
+  </div>
+  <div class="background">
+    <h2>检索字符串中的字符串</h2>
+    <h3>
+      <span>search() </span>方法搜索特定值的字符串，并返回匹配的位置
+    </h3>
+    <pre>
+      var pos = str.search("locate");
+    </pre>
+    <pre class="tishi">
+      search() 方法无法设置第二个开始位置参数
+      indexOf() 方法无法设置更强大的搜索值（正则表达式）
+    </pre>
+  </div>
+  <div class="background">
+    <h2>提取部分字符串</h2>
+    <h3>
+      <span>slice(start, end) </span>提取字符串的某个部分并在新字符串中返回被提取的部分。
+      <br>如果省略第二个参数，则该方法将裁剪字符串的剩余部分：
+      <br>或者从结尾计数：负值位置不适用 Internet Explorer 8 及其更早版本。</h3>
+    <pre>
+      var str = "Apple, Banana, Mango";
+      var res = str.slice(7,13);        
+    </pre>
+    <h3>
+      <span>substring(start, end) </span>类似于 slice()。不同之处在于 substring() 无法接受负的索引。
+    </h3>
+    <h3>
+      <span>substr(start, length)</span>类似于 slice()。
+        不同之处在于第二个参数规定被提取部分的长度。
+    </h3>
+  </div>
+  <div class="background">
+    <h2>替换字符串内容</h2>
+    <h3>
+      <span>replace() </span>方法用另一个值替换在字符串中指定的值：<br>
+      它不会改变调用它的字符串返回的是新字符串。<br>
+      默认地，replace() 只替换首个匹配：对大小写敏感<br>
+      如需执行大小写不敏感的替换，请使用正则表达式 /i（大小写不敏感）：
+    </h3>
+    <pre>
+      str = "Please visit Microsoft!";
+      var n = str.replace(/MICROSOFT/i, "W3School");        
+    </pre>
+    <h3>如需替换所有匹配，请使用正则表达式的<span> g </span>标志（用于全局搜索）：</h3>
+    <pre>
+      var n = str.replace(/Microsoft/g, "W3School");
+    </pre>
+    <h3>通过<span> toUpperCase() </span>把字符串转换为大写：</h3>
+    <h3>通过<span> toLowerCase() </span>把字符串转换为小写：</h3>
+    <pre>
+      var text1 = "Hello World!";       // 字符串
+      var text2 = text1.toLowerCase();  // text2 是被转换为小写的 text1        
+    </pre>
+    <h3><span>concat() </span>连接两个或多个字符串：</h3>
+    <pre>
+      var text1 = "Hello";
+      var text2 = "World";
+      text3 = text1.concat(" ",text2);        
+    </pre>
+    <h3><span>trim() </span>方法删除字符串两端的空白符：Internet Explorer 8 或更低版本不支持</h3>
+    <pre>
+      var str = "       Hello World!        ";
+      alert(str.trim());        
+    </pre>
+  </div>
+  <div class="background">
+    <h2>提取字符串字符</h2>
+    <div><span>charAt() </span>方法返回字符串中指定下标（位置）的字符串：</div>
+    <pre>
+      var str = "HELLO WORLD";
+      str.charAt(0);          
+    </pre>
+    <h3><span>charCodeAt() </span>方法返回字符串中指定索引的字符 unicode 编码</h3>
+    <pre>
+      var str = "HELLO WORLD";
+      str.charCodeAt(0);         // 返回 72        
+    </pre>
+  </div>
+  <div class="background">
+    <h2>把字符串转换为数组</h2>
+    <h3><span>可以通过 split() </span>将字符串转换为数组：</h3>
+    <pre>
+      var txt = "a,b,c,d,e";   // 字符串
+      txt.split(",");          // 用逗号分隔
+      txt.split(" ");          // 用空格分隔
+      txt.split("|");          // 用竖线分隔        
+    </pre>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../css/string.css">
+  <title>数字的方法</title>
+</head>
+
+<body>
+  <div class="background">
+    <h2>数字的方法</h2>
+    <h3><span>toString(几进制) 方法</span>以字符串返回数值</h3>
+    <pre>
+      var x = 123;
+      x.toString();            // 从变量 x 返回 123
+      (123).toString();        // 从文本 123 返回 123
+      (100 + 23).toString();   // 从表达式 100 + 23 返回 123      
+    </pre>
+    <h3><span>toExponential(定义小数点后的字符数：) 方法</span>返回字符串值，它包含已被四舍五入并使用指数计数法的数字</h3>
+    <pre>
+      var x = 9.656;
+      x.toExponential(2);     // 返回 9.66e+0
+      x.toExponential(4);     // 返回 9.6560e+0
+      x.toExponential(6);     // 返回 9.656000e+0
+    </pre>
+    <h3><span>toFixed(小数点后的长度) 方法</span>返回字符串值，它包含了指定位数小数的数字：</h3>
+    <pre>
+      var x = 9.656;
+      x.toFixed(0);           // 返回 10
+      x.toFixed(2);           // 返回 9.66
+      x.toFixed(4);           // 返回 9.6560
+      x.toFixed(6);           // 返回 9.656000     
+    </pre>
+    <h3><span>toPrecision(长度) 方法</span>返回字符串值，它包含了指定长度的数字：</h3>
+    <pre>
+      var x = 9.656;
+      x.toPrecision();        // 返回 9.656
+      x.toPrecision(2);       // 返回 9.7
+      x.toPrecision(4);       // 返回 9.656
+      x.toPrecision(6);       // 返回 9.65600
+    </pre>
+    <h3><span>valueOf() 方法</span> 以数值返回数值：</h3>
+    <pre>
+      var x = 123;
+      x.valueOf();            // 从变量 x 返回 123
+      (123).valueOf();        // 从文本 123 返回 123
+      (100 + 23).valueOf();   // 从表达式 100 + 23 返回 123
+    </pre>
+  </div>
+
+
+
+  <div class="background">
+    <h2>全局的方法</h2>
+    <h3><span>Number() 方法</span>可用于把 JavaScript 变量转换为数值：</h3>
+    <pre>
+      x = true;
+      Number(x);        // 返回 1
+      x = false;     
+      Number(x);        // 返回 0
+      x = new Date();
+      Number(x);        // 返回 1404568027739
+      x = "10"
+      Number(x);        // 返回 10
+      x = "10 20"
+      Number(x);        // 返回 NaN    
+    </pre>
+    <h3>如果无法转换成数字，则返回NaN</h3>
+    <h3>Number() 还可以把日期转换为数字：</h3>
+    <pre>
+      Number(new Date("2019-04-15"));    // 返回 1506729600000
+    </pre>
+    <h3>上面的 Number() 方法返回 1970 年 1 月 1 日至今的毫秒数。</h3>
+    <h3><span>parseInt() 方法</span>解析一段字符串并返回数值。允许空格。只返回首个数字：</h3>
+    <pre>
+      parseInt("10");         // 返回 10
+      parseInt("10.33");      // 返回 10
+      parseInt("10 20 30");   // 返回 10
+      parseInt("10 years");   // 返回 10
+      parseInt("years 10");   // 返回 NaN
+    </pre>
+    <h3><span>parseFloat() 方法</span>解析一段字符串并返回数值。允许空格。只返回首个数字：</h3>
+    <pre>
+      parseFloat("10");        // 返回 10
+      parseFloat("10.33");     // 返回 10.33
+      parseFloat("10 20 30");  // 返回 10
+      parseFloat("10 years");  // 返回 10
+      parseFloat("years 10");  // 返回 NaN  
+    </pre>
+  </div>
+
+  <h1>两种方法实现99乘法表</h1>
+  <pre>
+      var i, j;
+      for (i = 1; i <= 9; i++) {
+        document.write("<br>"); // i 为行的乘数，j 为列数  每一行打印完后换行
+        for (j = 1; j <= i; j++) {
+          sum = i * j;
+          document.write(i, "*", j, "=", sum, "   "); // 使 "i" 和 "j" 能打印出来
+        }
+      }
+    
+      function cfb() {
+        var bg = "<table>";
+        for (var i = 1; i <= 9; i++) {
+          bg += "<tr>";
+          for (var j = 1; j <= i; j++) {
+            bg += "<td>" + i + "*" + j + "=" + i * j + "</td>";
+          }
+          bg += "</td>";
+        }
+        bg += "</table>";
+        document.write(bg);
+      }
+      cfb();
+  </pre>
+  <h1>结果展示</h1>
+</body>
+
+<script>
+  var i, j;
+  for (i = 1; i <= 9; i++) {
+    document.write("<br>"); // i 为行的乘数，j 为列数  每一行打印完后换行
+    for (j = 1; j <= i; j++) {
+      sum = i * j;
+      document.write(i, "*", j, "=", sum, "   "); // 使 "i" 和 "j" 能打印出来
+    }
+  }
+
+  function cfb() {
+    var bg = "<table>";
+    for (var i = 1; i <= 9; i++) {
+      bg += "<tr>";
+      for (var j = 1; j <= i; j++) {
+        bg += "<td>" + i + "*" + j + "=" + i * j + "</td>";
+      }
+      bg += "</td>";
+    }
+    bg += "</table>";
+    document.write(bg);
+  }
+  cfb();
+</script>
+
+</html>

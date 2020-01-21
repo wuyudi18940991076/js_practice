@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>三角形实现方式</title>
+  <style>
+    .body{
+      border:2px solid #DDD;
+      width: 600px;
+      margin: 20px auto;
+    }
+    h2 {
+      width: 600px;
+      margin: 20px auto;
+    }
+
+    .demo1 {
+      width: 0px;
+      height: 0px;
+      border-bottom: 40px solid aqua;
+      /* border-top: 20px solid rgb(14, 211, 14);
+      border-left: 20px solid rgb(114, 34, 189);
+      border-right: 20px solid rgb(212, 247, 57); */
+      border-top: 40px solid transparent;
+      border-left: 40px solid transparent;
+      border-right: 40px solid transparent;
+      margin: 0 auto;
+    }
+
+    .demo2 {
+      width: 100px;
+      height: 100px;
+      background-color: chartreuse;
+      margin: 0 auto;
+    }
+
+    .demo2::before {
+      content: '';
+      width: 100px;
+      height: 100px;
+      display: inline-block;
+      background-color: #fff;
+      transform: translateX(-50%) skew(-45deg);
+      /* 代表的是扭曲 */
+    }
+
+    polygon {
+      fill: darkorange;
+      /* 填充 */
+      stroke: aqua;
+      /* 描边 */
+      stroke-width: 20;
+      /* 描边宽度 */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="body">
+    <div class="demo1">
+
+    </div>
+    <h2>
+      第一种方法使用border制作三角形
+      <pre>
+      width:0px;
+      height: 0px;
+      border-bottom: 20px solid aqua;
+      /* border-top: 20px solid rgb(14, 211, 14);
+      border-left: 20px solid rgb(114, 34, 189);
+      border-right: 20px solid rgb(212, 247, 57); */
+      border-top: 20px solid transparent;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+    </pre>
+    </h2>
+    <h2>
+      第二种方法：用的是伪类制作三角形
+      <pre>
+      .demo2 {
+        width: 100px;
+        height: 100px;
+        background-color: chartreuse;
+        margin: 0 auto;
+      }
+  
+      .demo2::before {
+        content: '';
+        width:100px;
+        height: 100px;
+        display: inline-block;
+        background-color:#fff;
+        transform:translateX(-50%) skew(-45deg);
+        /* 代表的是扭曲 */
+      }
+    </pre>
+    </h2>
+    <div class="demo2">
+
+    </div>
+    <h2>
+      第三种方法：H5画布制作三角形
+      <pre>
+      <canvas width="100" height="100" id="oCanvas"></canvas>
+      var oCanvas = document.getElementById('oCanvas')
+      var ctx = oCanvas.getContext('2d')
+      ctx.beginPath();
+      ctx.moveTo(50,0);
+      ctx.lineTo(0,50);
+      ctx.lineTo(100,50);
+      ctx.closePath();
+      // 闭合路径
+      ctx.stroke();
+      // 描边
+      ctx.fillStyle = '#f00'
+      ctx.fill()
+      <script>
+        // 选中画布，获取画笔
+        var oCanvas = document.getElementById('oCanvas')
+        var ctx = oCanvas.getContext('2d')
+        ctx.beginPath();
+        ctx.moveTo(50,0);
+        ctx.lineTo(0,50);
+        ctx.lineTo(100,50);
+        ctx.closePath();
+        // 闭合路径
+        ctx.stroke();
+        // 描边
+        ctx.fillStyle = '#f00'
+        ctx.fill()
+      </script>
+    </pre>
+    </h2>
+    <h2>
+      第四种用svg方式制作三角形
+      <!-- 绘制矢量图 -->
+      <svg width="100px" height="100px">
+        <polygon points="50 0, 0 50, 100 50" style="" />
+      </svg>
+    </h2>
+    路径优化
+    java是解释性语言
+    js是单线程
+  </div>
+</body>
+
+</html>

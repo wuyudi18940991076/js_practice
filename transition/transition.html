@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>transition变换</title>
+  <style>
+    .demo {
+      width: 250px;
+      height: 250px;
+      background-color: aqua;
+      /* transform: rotate(45deg);
+      transform: translate(100px); */
+      position: absolute;
+      left: 0;
+      top: 400px;
+      color: violet;
+      transition: left 2s ease-in;
+      transition-timing-function: ease-in;
+      line-height: 250px;
+      text-align: center;
+      font-size: 20px;
+      /* transition-timing-function:ease由慢(过度时间短)到快到慢 */
+      /* transition-timing-function:ease-in由慢到快 */
+      /* transition-timing-function:ease-out由快到慢 */
+      /* transition-timing-function:ease-in-out由慢(过度时间长)到快到慢 */
+      /* transition-timing-function:linear匀速的 */
+      transition: all 3s 0s;
+      /* all代表的是所有可过度的属性 1s是延迟一秒执行 */
+    }
+
+    .demo:hover {
+      left: 200px;
+      top: 200px;
+      background-color: blue;
+      color: yellow;
+      font-size: 22px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="demo">鼠标移上来试试</div>
+  <pre>
+  transform变换的一个形态也就是变形,静态的
+
+
+  transition动画的一个效果，变化的一个过程,过度动画
+
+  transform: rotate(45deg);
+  transform: translate(100px);
+  translate是一个函数方法
+  </pre>
+
+  <h3>transition过度</h3>
+  <p>
+    <span></span>
+  </p>
+
+  <h1>可以鼠标移动到下面的方块一秒试试有什么变化</h1>
+
+</body>
+
+</html>
